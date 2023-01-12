@@ -1,0 +1,74 @@
+//Health check
+GET https://api-project-qk43.onrender.com/health
+###
+
+//Media paths
+GET https://api-project-qk43.onrender.com/api/media
+###
+
+GET https://api-project-qk43.onrender.com/api/media/1
+###
+
+GET https://api-project-qk43.onrender.com/api/media/title/girls%
+###
+
+GET https://api-project-qk43.onrender.com/api/media/type/manga
+###
+
+POST https://api-project-qk43.onrender.com/api/media HTTP/1.1
+content-type: application/json
+
+{
+    "date_started": "2022-08-14",
+    "date_finished": "2022-12-28",
+    "rating": 9,
+    "title": "Mob Psycho 100 Season 2",
+    "type_id": 3
+}
+###
+
+PUT https://api-project-qk43.onrender.com/api/media HTTP/1.1
+content-type: application/json
+
+{
+    "id": 2,
+    "date_started": "2022-08-14",
+    "date_finished": "2022-12-29",
+    "rating": 9,
+    "title": "Mob Psycho 100 Season 3",
+    "type_id": 3
+}
+###
+
+DELETE https://api-project-qk43.onrender.com/api/media/2
+###
+
+//Types paths
+GET https://api-project-qk43.onrender.com/api/types
+###
+
+GET https://api-project-qk43.onrender.com/api/types/1
+###
+
+GET https://api-project-qk43.onrender.com/api/types/name/manga
+###
+
+POST https://api-project-qk43.onrender.com/api/types HTTP/1.1
+content-type: application/json
+
+{
+    "type": "Anime"
+}
+###
+
+PUT https://api-project-qk43.onrender.com/api/types HTTP/1.1
+content-type: application/json
+
+{
+    "id": 6,
+    "type": "Music"
+}
+###
+
+DELETE https://api-project-qk43.onrender.com/api/types/4
+###

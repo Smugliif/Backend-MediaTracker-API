@@ -1,0 +1,402 @@
+openapi: 3.0.0
+info:
+    version: 1.0.0
+    title: Media API
+    description: |-
+        This is an API to help keep track of media, that have been experienced in 
+        some format or another.
+        It can be used as a tool to look back on movies, books 
+        or something else of the like you have watched or read over a certain period of time.
+
+        Links:
+        - [The Media API repository](https://github.com/tiko-4A00EZ62/2022-wk49-final-project-Smugliif)
+servers:
+    - url: https://api-project-qk43.onrender.com/api/
+paths:
+    /media:
+        get:
+            description: Returns an array of media
+            responses:
+                "200":
+                    description: Successful response
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: integer
+                                        date_started:
+                                            type: string
+                                        date_finished:
+                                            type: string
+                                        rating:
+                                            type: integer
+                                        title:
+                                            type: string
+                                        type_id:
+                                            type: integer
+                                        type:
+                                            type: string
+                "500":
+                    $ref: "#/components/responses/500Error"
+        post:
+            description: Adds new media
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                date_started:
+                                    type: string
+                                date_finished:
+                                    type: string
+                                rating:
+                                    type: integer
+                                title:
+                                    type: string
+                                type_id:
+                                    type: integer
+            responses:
+                "201":
+                    description: New media added succesfully
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        type: integer
+                                    date_started:
+                                        type: string
+                                    date_finished:
+                                        type: string
+                                    rating:
+                                        type: integer
+                                    title:
+                                        type: string
+                                    type_id:
+                                        type: integer
+                "400":
+                    $ref: "#/components/responses/400Error"
+                "500":
+                    $ref: "#/components/responses/500Error"
+        put:
+            description: Updates an existing entry of media
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                id:
+                                    type: integer
+                                date_started:
+                                    type: string
+                                date_finished:
+                                    type: string
+                                rating:
+                                    type: integer
+                                title:
+                                    type: string
+                                type_id:
+                                    type: integer
+            responses:
+                "200":
+                    description: Updated succesfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Media"
+                "400":
+                    $ref: "#/components/responses/400Error"
+                "404":
+                    $ref: "#/components/responses/404Error"
+                "500":
+                    $ref: "#/components/responses/500Error"
+
+    /media/{id}:
+        get:
+            description: Get information about a specific media
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+            responses:
+                "200":
+                    description: Succesfully returned a media
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/MediaGET"
+                "400":
+                    $ref: "#/components/responses/400Error"
+                "404":
+                    $ref: "#/components/responses/404Error"
+                "500":
+                    $ref: "#/components/responses/500Error"
+        delete:
+            description: Delete a specific media
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+            responses:
+                "200":
+                    description: Media deleted
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: Media deleted successfully
+                "404":
+                    $ref: "#/components/responses/404Error"
+                "400":
+                    $ref: "#/components/responses/400Error"
+                "500":
+                    $ref: "#/components/responses/500Error"
+
+    /media/title/{title}:
+        get:
+            description: Get information about specific media by title
+            parameters:
+                - name: title
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Succesful response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/MediaGET"
+                "404":
+                    $ref: "#/components/responses/404Error"
+                "500":
+                    $ref: "#/components/responses/500Error"
+
+    /media/type/{type}:
+        get:
+            description: Get information about media associated with specific type
+            parameters:
+                - name: type
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Succesful response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/MediaGET"
+                "404":
+                    $ref: "#/components/responses/404Error"
+                "500":
+                    $ref: "#/components/responses/500Error"
+
+    /types:
+        get:
+            description: Returns an array of types
+            responses:
+                "200":
+                    description: Successful response
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: integer
+                                        type:
+                                            type: string
+                "500":
+                    $ref: "#/components/responses/500Error"
+
+        post:
+            description: Adds new type
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                type:
+                                    type: string
+            responses:
+                "201":
+                    description: New type added succesfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Type"
+                "400":
+                    $ref: "#/components/responses/400Error"
+                "500":
+                    $ref: "#/components/responses/500Error"
+
+        put:
+            description: Updates an existing type
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Type"
+            responses:
+                "200":
+                    description: Updated succesfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Type"
+                "400":
+                    $ref: "#/components/responses/400Error"
+                "404":
+                    $ref: "#/components/responses/404Error"
+                "500":
+                    $ref: "#/components/responses/500Error"
+
+    /types/{id}:
+        get:
+            description: Get information about a specific type
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+            responses:
+                "200":
+                    description: Succesfully returned a type
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Type"
+                "400":
+                    $ref: "#/components/responses/400Error"
+                "404":
+                    $ref: "#/components/responses/404Error"
+                "500":
+                    $ref: "#/components/responses/500Error"
+        delete:
+            description: Delete a specific type
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+            responses:
+                "200":
+                    description: Type deleted
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: Type deleted successfully
+                "404":
+                    $ref: "#/components/responses/404Error"
+                "400":
+                    $ref: "#/components/responses/400Error"
+                "500":
+                    $ref: "#/components/responses/500Error"
+
+    /types/name/{name}:
+        get:
+            description: Get a specific type by name
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+            responses:
+                "200":
+                    description: Succesfully returned a type
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Type"
+                "404":
+                    $ref: "#/components/responses/404Error"
+                "500":
+                    $ref: "#/components/responses/500Error"
+
+components:
+    schemas:
+        Media:
+            type: object
+            propeties:
+                id:
+                    type: integer
+                date_started:
+                    type: string
+                date_finished:
+                    type: string
+                rating:
+                    type: integer
+                title:
+                    type: string
+                type_id:
+                    type: integer
+        MediaGET:
+            type: object
+            propeties:
+                id:
+                    type: integer
+                date_started:
+                    type: string
+                date_finished:
+                    type: string
+                rating:
+                    type: integer
+                title:
+                    type: string
+                type:
+                    type: string
+        Type:
+            type: object
+            properties:
+                id:
+                    type: integer
+                type:
+                    type: string
+
+    responses:
+        400Error:
+            description: Invalid request
+            content:
+                text/plain:
+                    schema:
+                        type: string
+                        example: Invalid value
+        404Error:
+            description: Not found
+            content:
+                text/plain:
+                    schema:
+                        type: string
+                        example: Not found
+        500Error:
+            description: Internal error
+            content:
+                text/plain:
+                    schema:
+                        type: string
+                        example: Internal error

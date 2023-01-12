@@ -1,0 +1,74 @@
+//Health check
+GET http://localhost:5000/health
+###
+
+//Media paths
+GET http://localhost:5000/api/media
+###
+
+GET http://localhost:5000/api/media/1
+###
+
+GET http://localhost:5000/api/media/title/girls% 
+###
+
+GET http://localhost:5000/api/media/type/manga
+###
+
+POST http://localhost:5000/api/media HTTP/1.1
+content-type: application/json
+
+{
+    "date_started": "2022-08-14",
+    "date_finished": "2022-12-28",
+    "rating": 9,
+    "title": "Mob Psycho 100 Season 2",
+    "type_id": 3
+}
+###
+
+PUT http://localhost:5000/api/media HTTP/1.1
+content-type: application/json
+
+{
+    "id": 2,
+    "date_started": "2022-08-14",
+    "date_finished": "2022-12-29",
+    "rating": 9,
+    "title": "Mob Psycho 100 Season 3",
+    "type_id": 3
+}
+###
+
+DELETE http://localhost:5000/api/media/10
+###
+
+//Types paths
+GET http://localhost:5000/api/types
+###
+
+GET http://localhost:5000/api/types/1
+###
+
+GET http://localhost:5000/api/types/name/manga
+###
+
+POST http://localhost:5000/api/types HTTP/1.1
+content-type: application/json
+
+{
+    "type": "Album"
+}
+###
+
+PUT http://localhost:5000/api/types HTTP/1.1
+content-type: application/json
+
+{
+    "id": 6,
+    "type": "Music"
+}
+###
+
+DELETE http://localhost:5000/api/types/11
+###
