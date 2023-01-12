@@ -1,6 +1,4 @@
-# 4A00EZ62 Backend-kehitys
-
-# Final Project - Media API
+# Project - Media API
 
 ## Introduction
 
