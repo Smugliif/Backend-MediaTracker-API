@@ -5,10 +5,10 @@
 Most of us consume some kind of entertainment in our daily lives, be it books, TV or something else,
 you probably go through tens of different pieces of entertainment each year.
 As a part of our backend course at TAMK,
-I wanted to make an API dedicated to keeping track of all the media I consume almost daily.
-As someone who enjoys manga, movies and tv series a lot,
+I wanted to make an API dedicated to keeping track of all the media I consume.
+As someone who enjoys manga, games, movies and tv series a lot,
 some day I think I'll go back and look at all the things I have experienced, and I expect
-a rush of memories flooding my mind.
+a rush of memories to flood my mind.
 _Nerdy, I know._
 
 ## Server address and endpoints
